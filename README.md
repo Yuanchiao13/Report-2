@@ -12,6 +12,8 @@ import csv
 import numpy as np
 
 # Get the real data from https://www.kaggle.com/mlg-ulb/creditcardfraud/
+#進入https://www.kaggle.com/mlg-ulb/creditcardfraud/，且搜尋資料集/creditcard.csv。
+#進入https://www.kaggle.com/datasets/arockiaselciaa/creditcardcsv，下載資料集。
 fname = "/creditcard.csv"
 
 all_features = []

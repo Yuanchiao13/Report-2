@@ -6,6 +6,7 @@
 
 #作業流程
 
+首先，對 CSV 資料進行向量化
 ```python
 import csv
 import numpy as np
@@ -36,6 +37,7 @@ EXAMPLE FEATURES: [0.0, -1.3598071336738, -0.0727811733098497, 2.53634673796914,
 features.shape: (284807, 30)
 targets.shape: (284807, 1)
 
+準備驗證集
 ```python
 num_val_samples = int(len(features) * 0.2)
 train_features = features[:-num_val_samples]
@@ -48,6 +50,8 @@ print("Number of validation samples:", len(val_features))
 ```
 Number of training samples: 227846
 Number of validation samples: 56961
+
+分析目標中的類別不平衡
 ```python
 counts = np.bincount(train_targets[:, 0])
 print(
@@ -60,6 +64,8 @@ weight_for_0 = 1.0 / counts[0]
 weight_for_1 = 1.0 / counts[1]
 ```
 Number of positive samples in training data: 417 (0.18% of total)
+
+使用訓練集統計數據標準化數據
 ```python
 mean = np.mean(train_features, axis=0)
 train_features -= mean
@@ -68,6 +74,7 @@ std = np.std(train_features, axis=0)
 train_features /= std
 val_features /= std
 ```
+建構二元分類模型
 ```python
 import keras
 
@@ -105,6 +112,7 @@ Total params: 139777 (546.00 KB)
 Trainable params: 139777 (546.00 KB)
 Non-trainable params: 0 (0.00 Byte)
 _________________________________________________________________
+class_weight用參數訓練模型
 ```python
 metrics = [
     keras.metrics.FalseNegatives(name="fn"),

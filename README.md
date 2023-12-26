@@ -38,10 +38,6 @@ targets = np.array(all_targets, dtype="uint8")
 print("features.shape:", features.shape)
 print("targets.shape:", targets.shape)
 ```
-HEADER: "Time","V1","V2","V3","V4","V5","V6","V7","V8","V9","V10","V11","V12","V13","V14","V15","V16","V17","V18","V19","V20","V21","V22","V23","V24","V25","V26","V27","V28","Amount","Class"
-EXAMPLE FEATURES: [0.0, -1.3598071336738, -0.0727811733098497, 2.53634673796914, 1.37815522427443, -0.338320769942518, 0.462387777762292, 0.239598554061257, 0.0986979012610507, 0.363786969611213, 0.0907941719789316, -0.551599533260813, -0.617800855762348, -0.991389847235408, -0.311169353699879, 1.46817697209427, -0.470400525259478, 0.207971241929242, 0.0257905801985591, 0.403992960255733, 0.251412098239705, -0.018306777944153, 0.277837575558899, -0.110473910188767, 0.0669280749146731, 0.128539358273528, -0.189114843888824, 0.133558376740387, -0.0210530534538215, 149.62]
-features.shape: (284807, 30)
-targets.shape: (284807, 1)
 
 準備驗證集
 ```python
@@ -54,8 +50,7 @@ val_targets = targets[-num_val_samples:]
 print("Number of training samples:", len(train_features))
 print("Number of validation samples:", len(val_features))
 ```
-Number of training samples: 227846
-Number of validation samples: 56961
+
 
 分析目標中的類別不平衡
 ```python
@@ -69,7 +64,6 @@ print(
 weight_for_0 = 1.0 / counts[0]
 weight_for_1 = 1.0 / counts[1]
 ```
-Number of positive samples in training data: 417 (0.18% of total)
 
 使用訓練集統計數據標準化數據
 ```python
@@ -97,27 +91,7 @@ model = keras.Sequential(
 )
 model.summary()
 ```
-Model: "sequential"
-_________________________________________________________________
- Layer (type)                Output Shape              Param #   
-=================================================================
- dense (Dense)               (None, 256)               7936      
-                                                                 
- dense_1 (Dense)             (None, 256)               65792     
-                                                                 
- dropout (Dropout)           (None, 256)               0         
-                                                                 
- dense_2 (Dense)             (None, 256)               65792     
-                                                                 
- dropout_1 (Dropout)         (None, 256)               0         
-                                                                 
- dense_3 (Dense)             (None, 1)                 257       
-                                                                 
-=================================================================
-Total params: 139777 (546.00 KB)
-Trainable params: 139777 (546.00 KB)
-Non-trainable params: 0 (0.00 Byte)
-_________________________________________________________________
+
 class_weight用參數訓練模型
 ```python
 metrics = [
@@ -204,7 +178,4 @@ Epoch 27/30
 Epoch 28/30
 112/112 - 5s - loss: 4.4529e-07 - fn: 4.0000 - fp: 4957.0000 - tn: 222472.0000 - tp: 413.0000 - precision: 0.0769 - recall: 0.9904 - val_loss: 0.0218 - val_fn: 9.0000 - val_fp: 408.0000 - val_tn: 56478.0000 - val_tp: 66.0000 - val_precision: 0.1392 - val_recall: 0.8800 - 5s/epoch - 46ms/step
 Epoch 29/30
-112/112 - 5s - loss: 3.1511e-07 - fn: 5.0000 - fp: 3697.0000 - tn: 223732.0000 - tp: 412.0000 - precision: 0.1003 - recall: 0.9880 - val_loss: 0.0318 - val_fn: 9.0000 - val_fp: 760.0000 - val_tn: 56126.0000 - val_tp: 66.0000 - val_precision: 0.0799 - val_recall: 0.8800 - 5s/epoch - 41ms/step
-Epoch 30/30
-112/112 - 6s - loss: 2.2887e-07 - fn: 3.0000 - fp: 2951.0000 - tn: 224478.0000 - tp: 414.0000 - precision: 0.1230 - recall: 0.9928 - val_loss: 0.0336 - val_fn: 8.0000 - val_fp: 657.0000 - val_tn: 56229.0000 - val_tp: 67.0000 - val_precision: 0.0925 - val_recall: 0.8933 - 6s/epoch - 54ms/step
-<keras.src.callbacks.History at 0x78cb169e3370>
+112/112 - 5s - loss: 3.1511e-07 - fn: 5.0000 - fp: 3697.0000 - tn: 223732.0000 - tp: 412.0000 - precision: 0.1003 - recall: 0.9880 - 
